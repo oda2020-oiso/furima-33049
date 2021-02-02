@@ -5,10 +5,10 @@
 | nickname           | string     | null: false                    |
 | family_name        | string     | null: false                    |
 | first_name         | string     | null: false                    |
-| famiry_kana        | string     | null: false                    |
+| family_kana        | string     | null: false                    |
 | first_kana         | string     | null: false                    |
 | birthday           | date       | null: false                    |
-| email              | string     | null: false, foreign_key: true |
+| email              | string     | null: false,      unique: true |
 | encrypted_password | string     | null: false                    |
 
 ### Association
