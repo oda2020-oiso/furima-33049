@@ -1,24 +1,65 @@
-# README
+## usersテーブル
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| user_id            | integer    | null: false                    |
+| nickname           | string     | null: false                    |
+| family_name        | string     | null: false                    |
+| first_name         | string     | null: false                    |
+| famiry_kana        | string     | null: false                    |
+| first_kana         | string     | null: false                    |
+| birthday           | date       | null: false                    |
+| email              | string     | null: false                    |
+| password           | string     | null: false                    |
 
-Things you may want to cover:
+### Association
 
-* Ruby version
+- has_many :items
+- has_many :buy
 
-* System dependencies
+## itemsテーブル
 
-* Configuration
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item_id            | integer    | null: false                    |
+| name               | string     | null: false                    |
+| price              | string     | null: false                    |
+| image              | string     | null: false                    |
+| item_text          | text       | null: false                    |
+| category           | string     | null: false                    |
+| carriage           | string     | null: false                    |
+| item_prefecture    | string     | null: false                    |
+| scheduled_delivery | string     | null: false                    |
+| user_id            | references | null: false, foreign_key: true |
 
-* Database creation
+### Association
 
-* Database initialization
+- belongs_to :user
+- has_one :buy
 
-* How to run the test suite
+## buyテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| buy_id             | integer    | null: false                    |
+| credit_card        | integer    | null: false                    |
+| item_id            | references | null: false, foreign_key: true |
 
-* Deployment instructions
+## Association
 
-* ...
+- belongs_to :user
+- belongs_to :item
+- has_one :distribution
+
+## distributionテーブル
+
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| postal_code        | integer    | null: false                    |
+| user_prefecture    | string     | null: false                    |
+| city               | string     | null: false                    |
+| address            | string     | null: false                    |
+| phone_number       | integer    | null: false                    |
+| item_id            | references | null: false, foreign_key: true |
+
+- belongs_to :buy_id
