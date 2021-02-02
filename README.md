@@ -26,14 +26,14 @@
 | category_id        | integer    | null: false                    |
 | condition          | string     | null: false                    |
 | carriage           | string     | null: false                    |
-| item_prefecture    | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | scheduled_delivery | string     | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one :buys
+- has_one :buy
 
 ## buysテーブル
 
@@ -53,10 +53,11 @@
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postal_code        | string     | null: false                    |
-| user_prefecture    | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | string     | null: false                    |
 | address            | string     | null: false                    |
+| room_number        | string     |                                |
 | phone_number       | string     | null: false                    |
 | item               | references | null: false, foreign_key: true |
 
-- belongs_to :buy_id
+- belongs_to :buy
