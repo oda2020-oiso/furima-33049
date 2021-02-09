@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 2021_02_03_114530) do
     t.string "nickname", null: false
     t.string "family_name", null: false
     t.string "first_name", null: false
-    t.string "famiry_kana", null: false
+    t.string "family_kana", null: false
     t.string "first_kana", null: false
     t.date "birthday", null: false
     t.string "email", default: "", null: false
