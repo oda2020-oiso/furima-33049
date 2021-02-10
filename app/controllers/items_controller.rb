@@ -1,4 +1,9 @@
 class ItemsController < ApplicationController
-  def index
+  def new
+    @item = Item.new
   end
+
+  def create
+  end
+
 end
