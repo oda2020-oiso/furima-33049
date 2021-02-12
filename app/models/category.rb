@@ -1,5 +1,5 @@
 class Category < ActiveHash::Base
-# tsbk202
+
   self.data = [
     { id: 1, name: '---' },
     { id: 2, name: 'レディース' },
