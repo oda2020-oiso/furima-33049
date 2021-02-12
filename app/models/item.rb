@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category, :condition, :carriage, :prefecture, :schedule
+  has_one_attached :image
 
   validates :name, :text, presence: true
 
