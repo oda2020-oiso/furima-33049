@@ -9,9 +9,8 @@ class Item < ApplicationRecord
     validates :description
     validates :price, numericality: { greater_than: 299, less_than: 10_000_000 }
     validates :image
-
-    with_option numericality: {other_than: 1 } do
-      validates :category_id 
+    with_options numericality: { other_than: 1 } do
+      validates :category_id
       validates :condition_id
       validates :carriage_id
       validates :prefecture_id
