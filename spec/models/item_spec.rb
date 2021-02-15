@@ -34,32 +34,32 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリ情報が未選択の場合' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
 
       it '商品状態が未選択の場合' do
-        @item.condition_id = '1'
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition must be other than 1")
 
       end
 
       it '配送料負担の情報が未選択の場合' do
-        @item.carriage_id = '1'
+        @item.carriage_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Carriage must be other than 1")
       end
 
       it '発送元地域の情報が未選択の場合' do
-        @item.prefecture_id = '1'
+        @item.prefecture_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
 
       it '発送までの日数が未選択の場合' do
-        @item.schedule_id = '1'
+        @item.schedule_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Schedule must be other than 1")
 
@@ -72,13 +72,13 @@ RSpec.describe Item, type: :model do
       end
 
       it '価格が300円未満の場合' do
-        @item.price = '299'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be greater than 299")
       end
 
       it '価格が9,999,999円より大きい場合' do
-        @item.price = '10000000'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price must be less than 10000000")
       end
