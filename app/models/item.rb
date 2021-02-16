@@ -1,8 +1,12 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to :category, :condition, :prefecture, :schedule, :user
+  belongs_to :user
   has_one_attached :image
   belongs_to_active_hash :carriage
+  belongs_to_active_hash :prefecture
+  belongs_to_active_hash :category
+  belongs_to_active_hash :condition
+  belongs_to_active_hash :schedule
 
   with_options presence: true do
     validates :name
