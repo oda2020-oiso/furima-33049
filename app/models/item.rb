@@ -8,7 +8,6 @@ class Item < ApplicationRecord
   belongs_to_active_hash :condition
   belongs_to_active_hash :schedule
 
-
   with_options presence: true do
     validates :name
     validates :description
