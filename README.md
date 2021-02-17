@@ -5,7 +5,7 @@
 | nickname           | string     | null: false                    |
 | family_name        | string     | null: false                    |
 | first_name         | string     | null: false                    |
-| famiry_kana        | string     | null: false                    |
+| family_kana        | string     | null: false                    |
 | first_kana         | string     | null: false                    |
 | birthday           | date       | null: false                    |
 | email              | string     | null: false, foreign_key: true |
@@ -14,7 +14,7 @@
 ### Association
 
 - has_many :items
-- has_many :buys
+- has_many :orders
 
 ## itemsテーブル
 
@@ -33,9 +33,9 @@
 ### Association
 
 - belongs_to :user
-- has_one :buy
+- has_one :order
 
-## buysテーブル
+## ordersテーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
@@ -58,6 +58,7 @@
 | address            | string     | null: false                    |
 | building_name      | string     |                                |
 | phone_number       | string     | null: false                    |
-| buy                | references | null: false, foreign_key: true |
+| order              | references | null: false, foreign_key: true |
 
-- belongs_to :buy
+
+- belongs_to order
