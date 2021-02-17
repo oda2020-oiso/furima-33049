@@ -1,26 +1,34 @@
 class OrdersController < ApplicationController
 before_action :authenticate_user!, only: :create
 
+  def index
+  end
+
+  def new
+    @order_distribution = OrderDistribution.new
+  end
+
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
-      @order.save
-      return redirect_to root_path
+    @order_distribution = OrderDistribution.new(order_params)
+    if @order_distribution.valid?
+      pay_item
+      @order_distribution.save
+      redirect_to action: :index
     else
-      render 'index'
+      render action: :new
     end
   end
 
   private
 
   def order_params
-    params.require(:order).merge(user_id: current_user.id, item_id: params[:item.id], token: params[:token])
+    params.require(:order_distribution).permit(:postal_code, :prefecture, :city, :address, :building_name, :phone_number)merge(user_id: current_user.id, order_id: order_params.id, item_id: item_params.id, token: params[:token])
   end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
-      amount: order_params[:price],
+      amount: item_params[:price],
       card: order_params[:token],
       currency: 'jpy'
     )
