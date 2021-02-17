@@ -7,5 +7,6 @@ class Distribution < ApplicationRecord
     validates :prefecture_id, numericality: { other_than: 1 }
     validates :city
     validates :address
-    validates :phone_number, 
+    validates :phone_number
+  end
 end
