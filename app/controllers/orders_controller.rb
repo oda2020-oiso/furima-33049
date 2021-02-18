@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :index, :new]
+  before_action :authenticate_user!, only: [:create, :index]
   before_action :item_set, only: [:index, :create]
   attr_accessor :token
 
