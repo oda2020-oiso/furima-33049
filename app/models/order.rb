@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   attr_accessor :token
 
-  has_one :user
-  has_one :item
+  belongs_to :user
+  belongs_to :item
   has_one :distribution
 end
