@@ -1,11 +1,14 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index, :new]
   before_action :item_set, only: [:index, :create]
-  before_action :move_to_index, only: [:index, :create]
   attr_accessor :token
 
   def index
-    @order_distribution = OrderDistribution.new
+    if current_user.id == @item.user_id || @item.order.present?
+      redirect_to root_path
+    else
+      @order_distribution = OrderDistribution.new
+    end
   end
 
   def create
@@ -39,8 +42,5 @@ class OrdersController < ApplicationController
       card: distribution_params[:token],
       currency: 'jpy'
     )
-  end
-  if current_user.id == @item.user_id
-    redirect_to root_path
   end
 end
