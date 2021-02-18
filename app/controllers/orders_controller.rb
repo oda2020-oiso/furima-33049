@@ -4,13 +4,16 @@ before_action :item_set, only: [:index, :create]
 attr_accessor :token
 
   def index
-    @distribution = Distribution.new
+    distribution = Distribution.new
   end
 
   def create
     # @item = Item.find(params[:item_id]) 
-    @distribution = Distribution.new(order_params)
-    if @distribution.valid?
+    # order = Order.new(distribution_params)
+    @order_distribution = OrderDistribution.new(distribution_params)
+    
+    if @order_distribution.valid?
+      @order_distribution.save
       redirect_to root_path
     else
       render action: :index
@@ -27,14 +30,20 @@ attr_accessor :token
 
   private
 
-  def order_params
-    params.require(:distribution).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :phone_number)
+  def distribution_params
+    params.permit(:postal_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id)
     # params.require(:order,:distribution).permit(:postal_code, :prefecture, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, order_id: order_params.id, item_id: item_params.id, token: params[:token])
   end
+
 
   def item_set
     @item = Item.find(params[:item_id])
   end
+
+  # def order_params
+  #   params.merge(user_id: current_user.id, item_id: @item.id)
+  # end
+
 
   def pay_item
     # Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
