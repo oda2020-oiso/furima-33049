@@ -33,8 +33,8 @@
     <%# /支払額の表示 %>
 
 
-    <%= form_with(model: @distribution,  url: item_orders_path,id: 'charge-form', class: 'transaction-form-wrap',local: true) do |f| %>
-    <%# <%= render 'shared/error_messages', model: f.object %> %>
+    <%= form_with(model: @order_distribution,  url: item_orders_path,id: 'charge-form', class: 'transaction-form-wrap',local: true) do |f| %>
+    <%= render 'shared/error_messages', model: @order_distribution %>
 
     <%# <%= form_with(model: @user_donation, url: donations_path, local: true) do |form| %>
 

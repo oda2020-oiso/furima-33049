@@ -1,10 +1,10 @@
 class OrdersController < ApplicationController
 before_action :authenticate_user!, only: [:create, :index, :new]
 before_action :item_set, only: [:index, :create]
-attr_accessor :token
+# attr_accessor :token
 
   def index
-    distribution = Distribution.new
+    @order_distribution = OrderDistribution.new
   end
 
   def create
@@ -13,11 +13,15 @@ attr_accessor :token
     @order_distribution = OrderDistribution.new(distribution_params)
     
     if @order_distribution.valid?
+      # pay_item
       @order_distribution.save
       redirect_to root_path
     else
       render action: :index
     end
+    
+
+    
     # @order_distribution = OrderDistribution.new(order_params)
     # if @order_distribution.valid?
     #   pay_item
@@ -45,14 +49,14 @@ attr_accessor :token
   # end
 
 
-  def pay_item
-    # Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-    # Payjp::Charge.create(
-    #   amount: order_params[:price],  # 商品の値段
-    #   card: order_params[:token],    # カードトークン
-    #   currency: 'jpy'                 # 通貨の種類（日本円）
-    # )
-  end
+  # def pay_item
+  #   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+  #   Payjp::Charge.create(
+  #     amount: order_params[:price],  # 商品の値段
+  #     card: order_params[:token],    # カードトークン
+  #     currency: 'jpy'                 # 通貨の種類（日本円）
+  #   )
+  # end
 
   # def pay_item
   #   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
