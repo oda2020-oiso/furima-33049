@@ -8,10 +8,7 @@ before_action :item_set, only: [:index, :create]
   end
 
   def create
-    # @item = Item.find(params[:item_id]) 
-    # order = Order.new(distribution_params)
     @order_distribution = OrderDistribution.new(distribution_params)
-    binding.pry
     
     if @order_distribution.valid?
       # pay_item
