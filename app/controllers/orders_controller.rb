@@ -1,16 +1,16 @@
 class OrdersController < ApplicationController
 before_action :authenticate_user!, only: [:create, :index, :new]
 before_action :item_set, only: [:index, :create]
-# attr_accessor :token
+attr_accessor :token
 
   def index
     @order_distribution = OrderDistribution.new
   end
 
   def create
-    binding.pry
+binding.pry
     @order_distribution = OrderDistribution.new(distribution_params)
-    
+
     if @order_distribution.valid?
       # pay_item
       @order_distribution.save
@@ -34,7 +34,7 @@ before_action :item_set, only: [:index, :create]
   private
 
   def distribution_params
-    params.require(:order_distribution).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id)
+    params.require(:order_distribution).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id, token: params[:token], price: @item.price)
     # params.require(:order,:distribution).permit(:postal_code, :prefecture, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, order_id: order_params.id, item_id: item_params.id, token: params[:token])
   end
 

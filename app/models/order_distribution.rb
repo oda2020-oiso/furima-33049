@@ -1,8 +1,8 @@
 class OrderDistribution
   include ActiveModel::Model
-  attr_accessor :postal_code, :city, :prefecture_id, :building_name, :address, :phone_number, :user_id, :item_id, :order_id
+  attr_accessor :postal_code, :city, :prefecture_id, :building_name, :address, :phone_number, :user_id, :item_id, :order_id, :token, :price
 
-  # validates :token, presence: true
+  validates :token, presence: true
   validates :prefecture_id, numericality: { other_than: 1 }
 
   with_options presence: true do
@@ -18,5 +18,6 @@ class OrderDistribution
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
     Distribution.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, building_name: building_name, address: address, phone_number: phone_number, order_id: order.id)
+    
   end
 end
