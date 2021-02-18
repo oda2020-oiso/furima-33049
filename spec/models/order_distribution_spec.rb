@@ -81,6 +81,24 @@ RSpec.describe OrderDistribution, type: :model do
         @order_distribution.valid?
         expect(@order_distribution.errors.full_messages).to include('Phone number is invalid')
       end
+
+      it '電話番号は英数字混合では登録できない' do
+        @order_distribution.phone_number = '090ab78re24'
+        @order_distribution.valid?
+        expect(@order_distribution.errors.full_messages).to include('Phone number is invalid')
+      end
+
+      it 'user_idが空だと登録できない' do
+        @order_distribution.user_id = nil
+        @order_distribution.valid?
+        expect(@order_distribution.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空だと登録できない' do
+        @order_distribution.item_id = nil
+        @order_distribution.valid?
+        expect(@order_distribution.errors.full_messages).to include("Item can't be blank")
+      end
     end
   end
 end

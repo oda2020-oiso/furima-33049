@@ -1,7 +1,6 @@
 class OrderDistribution
   include ActiveModel::Model
-  attr_accessor :postal_code, :city, :prefecture_id, :building_name, :address, :phone_number, :user_id, :item_id, :order_id,
-                :token, :price
+  attr_accessor :postal_code, :city, :prefecture_id, :building_name, :address, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}-\d{4}\z/ }
