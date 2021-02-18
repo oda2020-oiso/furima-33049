@@ -8,6 +8,7 @@ before_action :item_set, only: [:index, :create]
   end
 
   def create
+    binding.pry
     @order_distribution = OrderDistribution.new(distribution_params)
     
     if @order_distribution.valid?
