@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe OrderDistribution, type: :model do
   before do
     @order_distribution = FactoryBot.build(:order_distribution)
+    @user = FactoryBot.build(:user)
+    @order_distribution.user_id = @user.id
+    @item = FactoryBot.build(:item)
+    @order_distribution.item_id = @item.id
   end
 
   describe '商品購入機能' do

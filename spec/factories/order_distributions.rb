@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :order_distribution do
-    user_id { 2 }
-    item_id { 2 }
     postal_code { '123-4567' }
     prefecture_id { 2 }
     city { '浦安市' }
