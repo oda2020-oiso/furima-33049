@@ -10,12 +10,7 @@ attr_accessor :token
   def create
     @order_distribution = OrderDistribution.new(distribution_params)
     if @order_distribution.valid?
-        Payjp.api_key = "sk_test_e52b1dd03c6f1bae4115b40b"
-        Payjp::Charge.create(
-        amount: @item.price,
-        card: distribution_params[:token],
-        currency: 'jpy'
-        )
+      pay_item
 
       @order_distribution.save
       redirect_to root_path
@@ -35,28 +30,12 @@ attr_accessor :token
     @item = Item.find(params[:item_id])
   end
 
-  # def order_params
-  #   params.merge(user_id: current_user.id, item_id: @item.id)
-  # end
-
-
-  # def pay_item
-  #   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-  #   Payjp::Charge.create(
-  #     amount: order_params[:price],  # 商品の値段
-  #     card: order_params[:token],    # カードトークン
-  #     currency: 'jpy'                 # 通貨の種類（日本円）
-  #   )
-  # end
-
-  # def pay_item
-  #   Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-  #   Payjp::Charge.create(
-  #     amount: item_params[:price],
-  #     card: order_params[:token],
-  #     currency: 'jpy'
-  #   )
-  # end
-
-
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+    amount: @item.price,
+    card: distribution_params[:token],
+    currency: 'jpy'
+    )
+  end
 end
