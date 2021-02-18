@@ -11,6 +11,7 @@ before_action :item_set, only: [:index, :create]
     # @item = Item.find(params[:item_id]) 
     # order = Order.new(distribution_params)
     @order_distribution = OrderDistribution.new(distribution_params)
+    binding.pry
     
     if @order_distribution.valid?
       # pay_item
@@ -35,7 +36,7 @@ before_action :item_set, only: [:index, :create]
   private
 
   def distribution_params
-    params.permit(:postal_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id)
+    params.require(:order_distribution).permit(:postal_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, item_id: @item.id)
     # params.require(:order,:distribution).permit(:postal_code, :prefecture, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id, order_id: order_params.id, item_id: item_params.id, token: params[:token])
   end
 

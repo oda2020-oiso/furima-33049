@@ -10,7 +10,8 @@ class OrderDistribution
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A(0{1}\d{9,10})\z/ }
-    validates :order_id
+    validates :user_id
+    validates :item_id
   end
 
 
