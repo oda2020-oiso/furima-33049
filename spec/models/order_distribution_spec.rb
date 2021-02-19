@@ -14,6 +14,13 @@ RSpec.describe OrderDistribution, type: :model do
       it '全てのフォームが適切に入力されている場合' do
         expect(@order_distribution).to be_valid
       end
+
+      it '住所が空欄でも登録ができる' do
+        @order_distribution.building_name = ''
+        expect(@order_distribution).to be_valid
+      end
+
+
     end
 
     context '購入に失敗する場合' do
@@ -70,14 +77,20 @@ RSpec.describe OrderDistribution, type: :model do
         expect(@order_distribution.errors.full_messages).to include("Address can't be blank")
       end
 
-      it '電話番号が空欄の場合' do
-        @order_distribution.phone_number = ''
+      it '電話番号が全角数字の場合' do
+        @order_distribution.phone_number = '０９０１２３４５６７８'
         @order_distribution.valid?
-        expect(@order_distribution.errors.full_messages).to include("Phone number can't be blank")
+        expect(@order_distribution.errors.full_messages).to include("Phone number is invalid")
       end
 
       it '電話番号の桁数が多い場合' do
         @order_distribution.phone_number = '0987654321234567'
+        @order_distribution.valid?
+        expect(@order_distribution.errors.full_messages).to include('Phone number is invalid')
+      end
+
+      it '電話番号は英数字混合では登録できない' do
+        @order_distribution.phone_number = '090ab78re24'
         @order_distribution.valid?
         expect(@order_distribution.errors.full_messages).to include('Phone number is invalid')
       end
