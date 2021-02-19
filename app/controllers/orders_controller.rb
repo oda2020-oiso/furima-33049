@@ -1,8 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:create, :index]
   before_action :item_set, only: [:index, :create]
-  before_action :move_to_index, ,only[:index,:create]
-  attr_accessor :token
+  before_action :move_to_index, only: [:index, :create]
 
   def index
       @order_distribution = OrderDistribution.new
@@ -45,4 +44,5 @@ class OrdersController < ApplicationController
     if current_user.id == @item.user_id || @item.order.present?
       redirect_to root_path
     end
+  end
 end

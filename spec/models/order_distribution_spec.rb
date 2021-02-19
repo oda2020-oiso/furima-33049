@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.describe OrderDistribution, type: :model do
   before do
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
     @order_distribution = FactoryBot.build(:order_distribution)
-    @user = FactoryBot.build(:user)
     @order_distribution.user_id = @user.id
-    @item = FactoryBot.build(:item)
     @order_distribution.item_id = @item.id
+    sleep 0.1
   end
 
   describe '商品購入機能' do
@@ -84,13 +85,7 @@ RSpec.describe OrderDistribution, type: :model do
       end
 
       it '電話番号の桁数が多い場合' do
-        @order_distribution.phone_number = '0987654321234567'
-        @order_distribution.valid?
-        expect(@order_distribution.errors.full_messages).to include('Phone number is invalid')
-      end
-
-      it '電話番号は英数字混合では登録できない' do
-        @order_distribution.phone_number = '090ab78re24'
+        @order_distribution.phone_number = '098765432123456789'
         @order_distribution.valid?
         expect(@order_distribution.errors.full_messages).to include('Phone number is invalid')
       end
